@@ -51,7 +51,7 @@
       <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
       </li>
        <li class="nav-list">
-        <%#= link_to "ジャンル追加", admin_genres_path, class: 'nav-link text-dark' %>
+        <%= link_to "ジャンル追加", admin_genres_path, class: 'nav-link text-dark' %>
       </li>
       <li class="nav-list">
         <%#= link_to "商品一覧", admin_items_path , class: 'nav-link text-dark'%>
@@ -62,6 +62,15 @@
       <li class="nav-list">
         <%#= link_to "注文一覧", admin_top_path, class: 'nav-link text-dark' %>
       </li>
+           <li class="nav-list">
+        <%= link_to "店舗一覧", admin_stores_path, class: 'nav-link text-dark' %>
+      </li>
+
+    <% else %>
+    <% if store_signed_in? %>
+        <li class="nav-list">
+      <%= link_to "店舗ログアウト", destroy_store_session_path, method: :delete, class: 'nav-link text-dark' %>
+      </li>
 
     <% else %>
 
@@ -71,6 +80,7 @@
       <li class="nav-list">
         <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
       </li>
+    <% end %>
     <% end %>
     <% end %>
   </header>

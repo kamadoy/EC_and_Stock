@@ -1,0 +1,17 @@
+<%= form_with model: @store,url:{controller: 'stores', action: 'update' } do |f| %>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">店舗名</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :name %></div>
+    <div class="form-group col-md-2">
+<label for="email">メールアドレス</label></div>
+ <div class="form-group col-md-2">
+<%= f.email_field :email %></div>
+<label for="address">住所</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :address %></div>
+
+<%= f.submit '更新', class: "btn btn-success btn-sm" %></div>
+</div>
+<% end %>

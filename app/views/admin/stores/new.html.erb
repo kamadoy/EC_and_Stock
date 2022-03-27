@@ -1,0 +1,59 @@
+
+<%= form_with model: @store, url: store_registration_path do |f| %>
+<% if !defined?(password_only) || !password_only %>
+    <div class="form-group col-md-2">
+<label for="name">店舗名</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :name %></div>
+<label for="address">住所</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :address %></div>
+ <label for="email">メールアドレス</label>
+ <div class="form-group col-md-2">
+<%= f.email_field :email %></div>
+  <% end %>
+  <% required = false %>
+  <% if @store.new_record? %>
+    <% required = true %>
+  <% end %>
+  <label for="password">パスワード</label>
+   <div class="form-group col-md-2">
+  <%= f.password_field :password, autocomplete: "off", required: required %></div>
+  <label for="password">もう一度入力してください</label>
+   <div class="form-group col-md-2">
+  <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <% if @store.persisted? && !current_user.has_role?(:admin) %>
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
+
+<%#= form_with model: @store,url:{controller: 'stores', action: 'create' } do |f| %>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">店舗名</label></div>
+ <div class="form-group col-md-2">
+<%#= f.text_field :name %></div>
+    <div class="form-group col-md-2">
+<label for="email">メールアドレス</label></div>
+ <div class="form-group col-md-2">
+<%#= f.email_field :email %></div>
+<label for="address">住所</label></div>
+ <div class="form-group col-md-2">
+<%#= f.text_field :address %></div>
+  <div class="field">
+    <%#= f.label :password %>
+    <%# if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <%# end %><br />
+    <%#= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%#= f.label :password_confirmation %><br />
+    <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+ <div class="form-group col-md-2 text-center">
+<%#= f.submit '新規登録', class: "btn btn-success btn-sm" %></div>
+</div>
+<%# end %>

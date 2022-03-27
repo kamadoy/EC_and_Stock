@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/create'
-    get 'genres/edit'
-    get 'genres/update'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # 顧客用
 # URL /customers/sign_in ...
@@ -33,6 +27,7 @@ devise_for :store, controllers: {
    resources :genres,only: [:create,:index,:edit,:update]
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
+   resources :stores,only: [:new,:create,:index,:show,:edit,:update,:destroy]
    get '/'=> 'homes#top', as: 'top'
     #get 'homes/top'
 

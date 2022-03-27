@@ -1,0 +1,21 @@
+<div class = "col-md-5">
+           <li class="nav-list">
+        <%= link_to "店舗追加", new_admin_store_path, class: 'nav-link text-dark' %>
+      </li>
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+      <th>店舗一覧</th>
+      <th></th>
+    </thead>
+  <today>
+ <tr>
+ <% @stores.each do |store| %>
+<td> <%= store.name %></td>
+<td><%= link_to "詳細ページ", admin_store_path(store.id), class: "btn btn-success btn-sm" %></td>
+<td><%= link_to "編集する", edit_admin_store_path(store.id), class: "btn btn-success btn-sm" %></td>
+ </tr>
+<% end %>
+  </today>
+   </table>
+</div>
+
