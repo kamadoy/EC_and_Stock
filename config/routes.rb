@@ -29,6 +29,7 @@ devise_for :store, controllers: {
    resources :order_details,only: [:show,:update]
    resources :stores,only: [:new,:create,:index,:show,:edit,:update,:destroy]
    get '/'=> 'homes#top', as: 'top'
+   post 'items/choice' => 'items#choice', as: 'choice'
     #get 'homes/top'
 
 
