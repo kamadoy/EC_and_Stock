@@ -4,6 +4,12 @@ class ItemDetail < ApplicationRecord
   belongs_to :item
   has_many :cart_items, dependent: :destroy
   has_many :order_datils, dependent: :destroy
+  has_many :size_stocks, dependent: :destroy
+  accepts_nested_attributes_for :size_stocks, allow_destroy: true
+  
+  def get_image_detail_id(width, height)
+    image_id.variant(resize_to_limit: [width, height]).processed
+  end
 
   def taxin_price
         price*1.1

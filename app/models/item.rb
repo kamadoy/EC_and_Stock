@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :genre
   belongs_to :store
   has_many :item_details, dependent: :destroy
-  accepts_nested_attributes_for :item_details
+  accepts_nested_attributes_for :item_details, allow_destroy: true
   def get_image_id(width, height)
     image_id.variant(resize_to_limit: [width, height]).processed
   end
