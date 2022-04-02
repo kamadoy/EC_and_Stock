@@ -12,3 +12,9 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+require("@rails/ujs").start()
+require("turbolinks").start()  //私はいつもコメントアウトします
+require("@rails/activestorage").start()
+require("channels")
+require('jquery') //これを追記
+import "cocoon"   //cocoonを動かすための記述

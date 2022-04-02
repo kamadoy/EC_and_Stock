@@ -1,0 +1,26 @@
+<div class="container">
+<h4><%= @customer.first_name %><%= @customer.last_name %>の会員詳細</h4>
+<table class ="table col-lg-6">
+  <thead></thead>
+  <today>
+ <tr><td class="col-lg-5"><p>会員ID</p></td>
+<td><%= @customer.id %></td></tr>
+ <tr><td class="col-lg-5"><p>氏名</p></td>
+<td><%= @customer.first_name %><%= @customer.last_name %></td></tr>
+ <tr><td class="col-lg-5"><p>カナ</p></td>
+<td><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td></tr>
+ <tr><td class="col-lg-5"><p>郵便番号</p></td>
+<td><%= @customer.postal_code %></td></tr>
+ <tr><td class="col-lg-5"><p>住所</p></td>
+<td><%= @customer.adress %></td></tr>
+ <tr><td class="col-lg-5"><p>電話番号</p></td>
+<td><%= @customer.telephone_number %></td></tr>
+ <tr><td class="col-lg-5"><p>メールアドレス</p></td>
+<td> <%= @customer.email %></td></tr>
+ <tr><td class="col-lg-5"><p>ステータス</p></td>
+<td><%= @customer.is_deleted ? '退会':'有効' %></td></tr>
+  </today>
+   </table>
+<br>
+<%= link_to "編集",edit_admin_customer_path, class: "btn btn-success btn-sm" %>
+</div>

@@ -1,0 +1,66 @@
+<div class=container>
+<%= form_with model: @customer ,url: {controller: 'admin/customers',action: 'update'} do |f| %>
+<h4><%= @customer.first_name %><%= @customer.last_name %>の会員編集</h4><br>
+  <div class="row">
+    <div class="col-md-2">
+<label for="id">会員ID</label></div>
+ <div class="col-md-2">
+<%= @customer.id %></div></div>
+  <div class="row">
+    <div class="form-group col-md-2">
+<label for="name">氏名</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :first_name %></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :last_name %></div>
+</div>
+  <div class="row">
+    <div class="form-group col-md-2">
+<label for="name">フリガナ</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :first_name_kana %></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :last_name_kana %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">郵便番号</label></div>
+ <div class="form-group col-md-5">
+<%= f.number_field :postal_code %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">住所</label></div>
+ <div class="form-group col-md-5">
+<%= f.text_field :adress %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">電話番号</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :telephone_number %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">メールアドレス</label></div>
+ <div class="form-group col-md-2">
+<%= f.email_field :email %></div>
+</div>
+<br>
+<div class="row">
+      <div class="form-group col-md-2">
+<label for="name">会員ステータス</label></div>
+ <div class="form-group col-md-2">
+<%= f.radio_button :is_deleted,false %>
+<%= f.label :is_deleted,'有効', value: false %></div>
+ <div class="form-group col-md-2">
+<%= f.radio_button :is_deleted,true %>
+<%= f.label :is_deleted,'退会', value: true %></div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+<%= f.submit '編集内容を保存', class: "btn btn-success btn-sm" %></div>
+
+<% end %>
+</div>

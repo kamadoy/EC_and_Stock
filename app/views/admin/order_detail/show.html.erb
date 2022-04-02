@@ -1,0 +1,89 @@
+<div class=container>
+<h4>注文履歴詳細</h4>
+<%= form_with model: @order,url: admin_order_detail_path(@order) do |f| %>
+<div class ="row">
+<div class = "col-lg-7">
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name"><b>購入者</b></label></div>
+ <div class="col-md-5">
+<%= link_to admin_customer_path(@order.customer) do %>
+<%= @order.customer.first_name %><%= @order.customer.last_name %></div>
+<% end %>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="day"><b>注文日</b></label></div>
+ <div class="col-md-5">
+ <%= @order.created_at.strftime('%Y/%m/%d') %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="day"><b>支払い方法</b></label></div>
+ <div class="col-md-5">
+ <%= @order.payment_method_i18n %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="day"><b>配送先</b></label></div>
+ <div class="col-md-5">
+ 〒<%= @order.postal_code %>
+    <%= @order.adress %><%= @order.name %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="day"><b>ステータス</b></label></div>
+ <div class="col-md-2">
+<%= f.select :status, Order.statuses_i18n.invert,{},placeholder: 0 %></div>
+<div class="col-md-5">
+    <%= f.submit "更新", class: "btn btn-success btn-sm" %></div>
+</div>
+</div>
+<%# end %>
+<div class = col-lg-3 mx-2>
+<b>請求情報</b>
+<table class ="table">
+    <today>
+        <tr>
+            <th>送料</th>
+            <th><%= @order.shipping_cost %>円</th>
+        </tr>
+            <tr>
+            <th>商品合計</th>
+            <th><%= @order.total_payment - @order.shipping_cost %>円</th>
+        </tr>
+            <tr>
+            <th>請求金額</th>
+            <th><%= @order.total_payment %>円</th>
+        </tr>
+    </today>
+</table>
+</div>
+</div>
+<div class = col-lg-8>
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+      <th>商品名</th>
+      <th>色・サイズ</th>
+      <th>値段(税込み)</th>
+      <th>個数</th>
+      <th>小計</th>
+    </thead>
+  <today>
+ <tr>
+<% @order_details.each do |order_detail| %>
+<%= f.fields_for :order_details,order_detail do |i| %>
+<td><%= order_detail.item.name %></td>
+<td><%= order_detail.item.item_detail.color %><%= order_detail.item.item_detail.size_stock.size %></td>
+<td><%= (order_detail.item.price*1.08).floor %>円</td>
+<td><%= order_detail.amount %></td>
+<td><%= order_detail.amount*(order_detail.item.price*1.08).floor %>円</td>
+<%= i.submit "更新", class: "btn btn-success btn-sm" %></td>
+ </tr>
+<% end %>
+<% end %>
+<% end %>
+  </today>
+   </table>
+   </div>
+</div>
