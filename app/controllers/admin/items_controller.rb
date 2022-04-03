@@ -1,13 +1,13 @@
 class Admin::ItemsController < ApplicationController
  def new
- @item = Item.new
+    @item = Item.new
     @item_detail = @item.item_details.build 
     @size_stock = @item_detail.size_stocks.build
     @genres = Genre.all
  end
 
 def create
- @item = Item.new(recipe_params)
+ @item = Item.new(item_params)
     if @item.save
       redirect_to admin_item_path(@item)
     else
@@ -32,12 +32,21 @@ end
     @items = Item.all
   end
   
+  def update
+     @item = Item.find(params[:id])
+     if@item.update(item_params)
+     redirect_to admin_item_path(@item)
+     else
+     render :edit
+     end
+  end
+  
   private
 
-  def recipe_params
+  def item_params
     params.require(:item).permit(:genre_id, :store_id,:name,:image_id,:introduction,:price,:is_active,:created_at,:updated_at ,
-                                  image_details_attributes:[:item_id, :color, :created_at,:updated_at,:_destroy ], 
-                                  size_stocks_attributes:[:item_detail_id,:size, :stock,  :created_at,:updated_at,:_destroy])
+                                  item_details_attributes:[:id,:item_id, :color,:image_detail_id, :created_at,:updated_at,:_destroy, 
+                                  size_stocks_attributes:[:id,:item_detail_id,:size, :stock,  :created_at,:updated_at,:_destroy]])
   end
 
 end

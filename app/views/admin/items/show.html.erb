@@ -38,20 +38,22 @@
 <p><%= @item.is_active ? '販売中':'販売停止中' %></p></div>
 </div>
 
-<% @item_details.each do|item_detail| %>
+<% @item_details.each do |item_detail| %>
 <table class ="table table-bordered">
   <thead class="table-secondary">
 <th><%= item_detail.color %></th>
-<% item_detail.size_stocks.each do |size| %>
-<th><%= size_stoc.size_in18n %></th>
+<% item_detail.size_stocks.each do |size_stock| %>
+<th><%= size_stock.size %></th>
 <% end %>
 </thead>
   <today>
  <tr>
-<% item_detail.size_stocks.each do |size| %>
-<td><%= size_stoc.stock %></td>
+     <td></td>
+<% item_detail.size_stocks.each do |size_stock| %>
+<td><%= size_stock.stock %></td>
 <% end %>
  </tr>
   </today>
    </table>
    <% end %>
+     <%= link_to "編集",edit_admin_item_path, class: "btn btn-success btn-sm text-center" %>
