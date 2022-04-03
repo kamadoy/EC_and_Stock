@@ -4,8 +4,9 @@ class Item < ApplicationRecord
   belongs_to :store
   has_many :item_details, dependent: :destroy
   accepts_nested_attributes_for :item_details, allow_destroy: true
+  validates_associated :item_details
   def get_image_id(width, height)
-    image_id.variant(resize_to_limit: [width, height]).processed
+    #image_id.variant(resize_to_limit: [width, height]).processed
   end
      with_options presence: true do
         validates :name

@@ -22,6 +22,24 @@ devise_for :store, controllers: {
   sessions: "store/sessions"
 }
 
+ root to: 'public/homes#top'
+
+  scope module: :public do
+
+    get '/about' => 'homes#about', as: 'about'
+    get 'customers/unsubsrib'=> 'customers#unsubsrib', as: 'unsubsrib'
+    patch 'customers/withdraw'=> 'customers#withdraw', as: 'withdraw'
+    delete '/cart_items/:id/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
+    resources :cart_items,only: [:index,:create,:update,:destroy]
+    resources :adresses,only: [:index,:edit,:create,:destroy,:update]
+    resources :customers,only: [:show,:edit,:update]
+    resources :items,only: [:index,:show]
+    post 'orders/confirm' => 'orders#confirm', as: 'confirm'
+    get 'orders/thanks' => 'orders#thanks', as: 'thanks'
+    resources :orders,only: [:new,:create,:index,:show]
+
+  end
+
   namespace :admin do
    resources :items,only: [:new,:create,:index,:show,:edit,:update]
    resources :genres,only: [:create,:index,:edit,:update]

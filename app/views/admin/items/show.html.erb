@@ -1,2 +1,57 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<div class="container">
+
+  <div class ="row">
+    <div class ="col-lg-6">
+  <%#= image_tag @item.get_image_id(500,500) %>
+  </div>
+  <div class ="col-lg-6"><br>
+  <div class="row">
+    <div class="col-md-3">
+<label for="name">商品名</label></div>
+ <div class="col-md-6">
+<h4><%= @item.name %></h4></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="introduction">商品説明</label></div>
+ <div class="col-md-6">
+<p><%= @item.introduction %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">ジャンル</label></div>
+ <div class="col-md-6">
+<p><%= @item.genre.name %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">税抜き価格<br>(税込み価格)</label></div>
+ <div class="col-md-6">
+<h4><%= @item.price %>円</h4>
+<p><%= (@item.price*1.08).floor %>円</p>
+</div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">販売ステータス</label></div>
+ <div class="col-md-6">
+<p><%= @item.is_active ? '販売中':'販売停止中' %></p></div>
+</div>
+
+<% @item_details.each do|item_detail| %>
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+<th><%= item_detail.color %></th>
+<% item_detail.size_stocks.each do |size| %>
+<th><%= size_stoc.size_in18n %></th>
+<% end %>
+</thead>
+  <today>
+ <tr>
+<% item_detail.size_stocks.each do |size| %>
+<td><%= size_stoc.stock %></td>
+<% end %>
+ </tr>
+  </today>
+   </table>
+   <% end %>

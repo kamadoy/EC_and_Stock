@@ -1,0 +1,28 @@
+<div class="nested-fields">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="img">商品画像</label>
+        </div>
+        <div class="form-group col-md-2">
+            <%= f.file_field :image_detail_id, accept: "image/*" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="color_select">カラー選択</label>
+        </div>
+        <div class="form-group col-md-2">
+            <%= f.select :color, ItemDetail.colors_i18n.invert,{},placeholder: 0 %>
+        </div>
+    </div>
+    <div class="links-fields">
+
+        <%= f.fields_for :size_stocks do |u| %>
+            <%= render "size_stock_fields", f: u %>
+        <% end %>
+        <div class="links">
+        <%= link_to_add_association "サイズと在庫を追加", f, :size_stocks,class: 'btn btn-success' %>
+        </div>
+                <%= link_to_remove_association "色を削除", f %>
+    </div>
+</div>
