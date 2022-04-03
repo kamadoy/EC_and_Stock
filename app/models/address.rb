@@ -1,7 +1,7 @@
 class Address < ApplicationRecord
   belongs_to :customer
-  def adress_display
-  '〒' + postal_code + ' ' + adress + ' ' + name
+  def address_display
+  '〒' + postal_code + ' ' + address + ' ' + name
   end
   with_options presence: true do
   validates :name

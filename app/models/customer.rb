@@ -27,7 +27,7 @@ save
         validates :first_name_kana
         validates :address
         validates :postal_code
-        validates :adress
+        validates :address
         validates :telephone_number
   end
 end

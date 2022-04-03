@@ -2,7 +2,7 @@
 
   <div class ="row">
     <div class ="col-lg-6">
-  <%#= image_tag @item.get_image_id(500,500) %>
+  <%= image_tag @item.get_image_id(500,500) %>
   </div>
   <div class ="col-lg-6"><br>
   <div class="row">
@@ -48,7 +48,7 @@
 </thead>
   <today>
  <tr>
-     <td></td>
+     <td><%= image_tag item_detail.get_image_detail_id(50,50) %></td>
 <% item_detail.size_stocks.each do |size_stock| %>
 <td><%= size_stock.stock %></td>
 <% end %>

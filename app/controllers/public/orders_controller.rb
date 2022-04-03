@@ -9,15 +9,15 @@ def new
     @order = Order.new(order_params)
     @order.shipping_cost = 800
 
-    if @order.select_adress == '0'
+    if @order.select_address == '0'
     @order.postal_code = current_customer.postal_code
-    @order.adress = current_customer.adress
+    @order.address = current_customer.address
     @order.name = current_customer.first_name + current_customer.last_name
-    elsif @order.select_adress == '1'
-        @adress = Adress.find(params[:order][:adress_id])
-        @order.postal_code = @adress.postal_code
-        @order.adress = @adress.adress
-        @order.name = @adress.name
+    elsif @order.select_address == '1'
+        @address = address.find(params[:order][:address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
     else
     end
   end
@@ -56,6 +56,6 @@ def new
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :adress, :name,:customer_id,:shipping_cost,:select_adress,:adress_id,:total_payment,:status,:created_at,:update_at,:adress_id)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name,:customer_id,:shipping_cost,:select_address,:address_id,:total_payment,:status,:created_at,:update_at,:address_id)
   end
 end

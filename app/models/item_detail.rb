@@ -7,7 +7,7 @@ class ItemDetail < ApplicationRecord
   validates_associated :size_stocks
   
   def get_image_detail_id(width, height)
-    image_id.variant(resize_to_limit: [width, height]).processed
+    image_detail_id.variant(resize_to_limit: [width, height]).processed
   end
 
   def taxin_price

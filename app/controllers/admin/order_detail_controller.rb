@@ -14,7 +14,7 @@ class Admin::OrderDetailController < ApplicationController
 
    private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :adress, :name,:customer_id,:shipping_cost,:select_adress,:adress_id,:total_payment,:status,:created_at,:update_at,:adress_id,
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name,:customer_id,:shipping_cost,:select_address,:address_id,:total_payment,:status,:created_at,:update_at,:address_id,
                                   order_details_attributes:[:id,:item_id, :order_id, :price, :amount,:created_at,:update_at])
   end
 end
