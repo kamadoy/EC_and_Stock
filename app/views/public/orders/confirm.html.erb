@@ -6,6 +6,7 @@
 <table class ="table table-bordered">
   <thead class="table-secondary">
       <th>商品名</th>
+      <th>カラー・サイズ</th>
       <th>値段</th>
       <th>数量</th>
       <th>小計</th>
@@ -13,11 +14,13 @@
   <today>
  <tr>
 <% @cart_items.each do |cart_item| %>
-<td><%= image_tag cart_item.item.get_image_id(100,100) %>
-<%= cart_item.item.name %></td>
-<td><%= (cart_item.item.price*1.08).floor %>円</td>
+<td><%= image_tag cart_item.size_stock.item_detail.get_image_detail_id(100,100) %>
+<%= cart_item.item_order.name %></td>
+<td><%= cart_item.size_stock.item_detail.color %>
+<%= cart_item.size_stock.size %></td>
+<td><%= (cart_item.item_order.taxin_price).floor %>円</td>
 <td><%= cart_item.amount %></td>
-<td><%= cart_item.amount*(cart_item.item.price*1.08).floor %>円</td>
+<td><%= cart_item.amount*(cart_item.item_order.taxin_price).floor %>円</td>
  </tr>
 <% end %>
   </today>
@@ -51,8 +54,8 @@
 <b>お届け先</b>
 〒<%= @order.postal_code %>
 <%= f.hidden_field :postal_code, :value => @order.postal_code %>
-<%= @order.adress %>
-<%= f.hidden_field :adress, :value => @order.adress %>
+<%= @order.address %>
+<%= f.hidden_field :address, :value => @order.address %>
 <%= @order.name %>
 <%= f.hidden_field :name, :value => @order.name %>
 <%= f.hidden_field :shipping_cost, :value => 800 %></div>

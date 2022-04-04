@@ -1,4 +1,4 @@
-<%= form_with model: @adress ,url: {controller: 'public/adresses',action: 'update'} do |f| %>
+<%= form_with model: @address ,url: {controller: 'public/addresses',action: 'update'} do |f| %>
 <div class="container">
 <h4>配送先登録・一覧</h4>
  <div class="form-group">
@@ -6,8 +6,8 @@
        <%= f.number_field :postal_code %>
  </div>
 <div class="form-group">
-　<label for="adress">住所</label>
-       <%= f.text_field :adress %>
+　<label for="address">住所</label>
+       <%= f.text_field :address %>
 </div>
 <div class="form-group">
 　<label for="name">宛名</label>

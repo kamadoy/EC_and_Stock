@@ -31,7 +31,7 @@ devise_for :store, controllers: {
     patch 'customers/withdraw'=> 'customers#withdraw', as: 'withdraw'
     delete '/cart_items/:id/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
     resources :cart_items,only: [:index,:create,:update,:destroy]
-    resources :adresses,only: [:index,:edit,:create,:destroy,:update]
+    resources :addresses,only: [:index,:edit,:create,:destroy,:update]
     resources :customers,only: [:show,:edit,:update]
     resources :items,only: [:index,:show]
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'

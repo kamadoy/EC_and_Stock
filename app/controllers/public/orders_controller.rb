@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-def new
+  def new
     @order = Order.new
   end
 
@@ -31,8 +31,8 @@ def new
    @cart_items.each do |cart_item|
      @order_detail = OrderDetail.new
      @order_detail.order_id = @order.id
-     @order_detail.item_id = cart_item.item_id
-     @order_detail.price = cart_item.item.price
+     @order_detail.size_stock_id = cart_item.size_stock_id
+     @order_detail.price = cart_item.item_order.price
      @order_detail.amount = cart_item.amount
      @order_detail.save
    end

@@ -1,4 +1,4 @@
-<%= form_with model: @adress ,url: {controller: 'public/adresses',action: 'create'} do |f| %>
+<%= form_with model: @address ,url: {controller: 'public/addresses',action: 'create'} do |f| %>
 <div class="container">
 <h4>配送先登録・一覧</h4>
  <div class="form-group">
@@ -6,8 +6,8 @@
        <%= f.number_field :postal_code %>
  </div>
 <div class="form-group">
-　<label for="adress">住所</label>
-       <%= f.text_field :adress %>
+　<label for="address">住所</label>
+       <%= f.text_field :address %>
 </div>
 <div class="form-group">
 　<label for="name">宛名</label>
@@ -24,12 +24,12 @@
     </thead>
     <today>
     <tr>
-<% @adresses.each do |adress| %>
-<td><%= adress.postal_code %></td>
-<td><%= adress.adress %></td>
-<td><%= adress.name %></td>
-<td><%= link_to "編集", edit_adress_path(adress), class: "btn btn-success btn-sm" %></td>
-<td><%= link_to "削除", adress_path(adress),method: :delete,"data-confirm" => "Are you sure?", class: " btn btn-sm btn-danger" %></td>
+<% @addresses.each do |address| %>
+<td><%= address.postal_code %></td>
+<td><%= address.address %></td>
+<td><%= address.name %></td>
+<td><%= link_to "編集", edit_address_path(address), class: "btn btn-success btn-sm" %></td>
+<td><%= link_to "削除", address_path(address),method: :delete,"data-confirm" => "Are you sure?", class: " btn btn-sm btn-danger" %></td>
  </tr>
 <% end %>
 <% end %>

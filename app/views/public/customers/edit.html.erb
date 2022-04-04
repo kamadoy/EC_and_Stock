@@ -1,2 +1,53 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container">
+<%= form_with model: @customer ,url: {controller: 'public/customers',action: 'update'} do |f| %>
+<h4>会員情報編集</h4><br>
+  <div class="row">
+    <div class="form-group col-md-2">
+<label for="name">氏名</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :first_name %></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :last_name %></div>
+</div>
+  <div class="row">
+    <div class="form-group col-md-2">
+<label for="name">フリガナ</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :first_name_kana %></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :last_name_kana %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">郵便番号</label></div>
+ <div class="form-group col-md-5">
+<%= f.number_field :postal_code %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">住所</label></div>
+ <div class="form-group col-md-5">
+<%= f.text_field :address %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="name">電話番号</label></div>
+ <div class="form-group col-md-2">
+<%= f.text_field :telephone_number %></div>
+</div>
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="email">メールアドレス</label></div>
+ <div class="form-group col-md-2">
+<%= f.email_field :email %></div>
+</div>
+<br>
+
+<div class="row">
+    <div class="form-group col-md-4">
+<%= f.submit '編集内容を保存',class: 'btn btn-success btn-sm' %></div>
+ <div class="form-group col-md-4">
+<%= link_to "退会する", unsubsrib_path, class: " btn btn-sm btn-danger" %></div>
+</div>
+<% end %>
+ </div>
