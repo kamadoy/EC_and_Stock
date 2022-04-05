@@ -14,7 +14,7 @@ class Public::OrdersController < ApplicationController
     @order.address = current_customer.address
     @order.name = current_customer.first_name + current_customer.last_name
     elsif @order.select_address == '1'
-        @address = address.find(params[:order][:address_id])
+        @address = Address.find(params[:order][:address_id])
         @order.postal_code = @address.postal_code
         @order.address = @address.address
         @order.name = @address.name
@@ -29,6 +29,9 @@ class Public::OrdersController < ApplicationController
 
    @cart_items = current_customer.cart_items
    @cart_items.each do |cart_item|
+     @size_stock = cart_item.size_stock
+     @size_stock.stock -= cart_item.amount
+     @size_stock.save
      @order_detail = OrderDetail.new
      @order_detail.order_id = @order.id
      @order_detail.size_stock_id = cart_item.size_stock_id
@@ -36,6 +39,7 @@ class Public::OrdersController < ApplicationController
      @order_detail.amount = cart_item.amount
      @order_detail.save
    end
+  
    @cart_items.destroy_all
   redirect_to thanks_path
   end
@@ -58,4 +62,5 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:payment_method, :postal_code, :address, :name,:customer_id,:shipping_cost,:select_address,:address_id,:total_payment,:status,:created_at,:update_at,:address_id)
   end
+
 end

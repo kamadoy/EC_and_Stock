@@ -47,6 +47,7 @@
 <table class ="table table-bordered">
   <thead class="table-secondary">
       <th>商品名</th>
+      <th>サイズ・カラー</th>
       <th>値段(税込み)</th>
       <th>個数</th>
       <th>小計</th>
@@ -54,10 +55,11 @@
   <today>
  <tr>
 <% @order_details.each do |order_detail| %>
-<td><%= order_detail.item.name %></td>
-<td><%= (order_detail.item.price*1.08).floor %>円</td>
+<td><%= order_detail.item_order.name %></td>
+<td><%= order_detail.size_stock.size %>・<%= order_detail.size_stock.item_detail.color %></td>
+<td><%= (order_detail.item_order.taxin_price).floor %>円</td>
 <td><%= order_detail.amount %></td>
-<td><%= order_detail.amount*(order_detail.item.price*1.08).floor %>円</td>
+<td><%= order_detail.amount*(order_detail.item_order.taxin_price).floor %>円</td>
  </tr>
 <% end %>
   </today>
