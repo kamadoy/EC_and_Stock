@@ -4,7 +4,7 @@
             <label for="img">色別商品画像</label>
         </div>
         <div class="form-group col-md-2">
-            <%= f.file_field :image_detail_id, accept: "image/*" %>
+            <%#= f.file_field :image_detail_id, accept: "image/*" %>
         </div>
     </div>
     <div class="row">
@@ -21,7 +21,7 @@
             <%= render "size_stock_fields", f: u %>
         <% end %>
         <div class="links">
-        <%= link_to_add_association "サイズと在庫を追加", f, :size_stocks,class: 'btn btn-success' %>
+        <%#= link_to_add_association "サイズと在庫を追加", f, :size_stocks,class: 'btn btn-success' %>
         </div>
                 <%#= link_to_remove_association "色を削除", f %>
     </div>

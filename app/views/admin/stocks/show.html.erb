@@ -1,0 +1,58 @@
+<div class="container">
+
+<h4>店舗在庫配送</h4>
+<h4>物流センター在庫</h4>
+
+  <div class ="col-lg-6"><br>
+  <div class="row">
+    <div class="col-md-3">
+<label for="name">商品名</label></div>
+ <div class="col-md-6">
+<h4><%= @store_item.name %></h4></div>
+</div>
+
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">ジャンル</label></div>
+ <div class="col-md-6">
+<p><%#= @store_item.genre.name %></p></div>
+
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">税抜き価格<br>(税込み価格)</label></div>
+ <div class="col-md-6">
+<h4><%= @store_item.price %>円</h4>
+<p><%#= (@store_item.price*1.1).floor %>円</p>
+</div>
+
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">販売ステータス</label></div>
+ <div class="col-md-6">
+<p><%= @store_item.is_active ? '販売中':'販売停止中' %></p></div>
+
+</div>
+<% @store_item_details.each do |store_item_detail| %>
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+<th><%= store_item_detail.color %></th>
+<% store_item_detail.store_stocks.each do |store_stock| %>
+<th><%= store_stock.size %></th>
+<% end %>
+</thead>
+  <today>
+ <tr>
+     <td><%#= image_tag store_item_detail.get_image_detail_id(50,50) %></td>
+<% store_item_detail.store_stocks.each do |store_stock| %>
+<td><%= store_stock.stock %></td>
+<% end %>
+ </tr>
+  </today>
+   </table>
+   <% end %>
+
+
+
+</div>

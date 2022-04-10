@@ -1,90 +1,57 @@
 <div class="container">
-<%= form_with model: @stock ,url: admin_delivery_path do |f| %>
-<h4>店舗在庫配送</h4>
+<%= form_with model: @store_item ,url: admin_delivery_path do |f| %>
 
-
+<%= f.hidden_field :item_id, :value => @item.id %>
+  <div class ="row">
+    <div class ="col-lg-6">
+  <%= image_tag @item.get_image_id(500,500) %>
+  </div>
+  <div class ="col-lg-6"><br>
   <div class="row">
     <div class="col-md-3">
 <label for="name">商品名</label></div>
  <div class="col-md-6">
-<h4><%= @stock.name %></h4></div>
+<h4><%= @item.name %></h4></div>
+<%= f.hidden_field :name, :value => @item.name %>
 </div>
   <div class="row">
     <div class="col-md-3">
 <label for="introduction">商品説明</label></div>
  <div class="col-md-6">
-<p><%= @stock.introduction %></p></div>
+<p><%= @item.introduction %></p></div>
 </div>
   <div class="row">
     <div class="col-md-3">
 <label for="genre">ジャンル</label></div>
  <div class="col-md-6">
-<p><%= @stock.genre.name %></p></div>
+<p><%= @item.genre.name %></p></div>
+<%= f.hidden_field :genre_id, :value => @item.genre_id %>
 </div>
   <div class="row">
     <div class="col-md-3">
 <label for="genre">税抜き価格<br>(税込み価格)</label></div>
  <div class="col-md-6">
-<h4><%= @stock.price %>円</h4>
-<p><%= (@stock.price*1.08).floor %>円</p>
+<h4><%= @item.price %>円</h4>
+<p><%= (@item.price*1.1).floor %>円</p>
 </div>
+<%#= f.hidden_field :price, :value => @item.price %>
 </div>
   <div class="row">
     <div class="col-md-3">
 <label for="genre">販売ステータス</label></div>
  <div class="col-md-6">
-<p><%= @stock.is_active ? '販売中':'販売停止中' %></p></div>
+<p><%= @item.is_active ? '販売中':'販売停止中' %></p></div>
+<%= f.hidden_field :is_active, :value => @item.is_active %>
 </div>
-
-
-
-
-
+<h4>配送先店舗</h4>
 <div class="row">
     <div class="form-group col-md-2">
-<label for="store">配送先店舗</label></div>
+<label for="genre">店舗選択</label></div>
  <div class="form-group col-md-2">
 <%= f.select :store_id, @stores.map{|store| [store.name,store.id]} %></div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="img">商品画像</label></div>
- <div class="form-group col-md-2">
-<%= f.file_field :image_id, accept: "image/*" %></div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="name">商品名</label></div>
- <div class="form-group col-md-2">
-<%= f.text_field :name %></div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="introduction">商品説明</label></div>
- <div class="form-group col-md-2">
-<%= f.text_area :introduction %></div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="genre">ジャンル</label></div>
- <div class="form-group col-md-2">
-<%= f.select :genre_id, @genres.map{|genre| [genre.name,genre.id]} %></div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="introduction">税抜き価格</label></div>
- <div class="form-group col-md-3">
-<%= f.number_field :price %>円</div>
-</div>
-<div class="row">
-    <div class="form-group col-md-2">
-<label for="introduction">販売ステータス</label></div>
- <div class="form-group col-md-4">
-<%= f.radio_button :is_active, true %>
-<%= f.label :is_active, '販売中', value: true %>
-<%= f.radio_button :is_active, false %>
-<%= f.label :is_active, '販売停止中', value: false %></div>
-</div>
+</div> 
+
+
 
    <div class="item_details">
        <div class="mx-auto">

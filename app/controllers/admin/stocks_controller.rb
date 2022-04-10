@@ -1,11 +1,13 @@
 class Admin::StocksController < ApplicationController
   def new_store_stock
     @item = Item.find(params[:id])
-    @stock = @item.deep_clone(include: [:item_details] ,except: [{ item_details: [:id] }])
-    #@item_detail = @stock.item_details.build
-    #@size_stock = @item_detail.size_stocks.build
-    @genres = Genre.all
+    @store_item = @item.deep_clone(include: [:item_details,{item_details: :size_stocks}] )
     @stores = Store.all
+  end
+  
+  def show
+    @store_item = StoreItem.find(params[:id])
+    @store_item_details = @store_item.store_item_details
   end
   
   def edit
@@ -15,12 +17,34 @@ class Admin::StocksController < ApplicationController
   end
 
   def delivery
-   # @item = Item.find(params[:id])
-    #@stock = @item.deep_clone(include: [:item_details])
-    #@stock.attributes = item_params #strong parameter
-    @stock = Item.new
-    @stock.save!
-    redirect_to edit_admin_stock_path(@stock)
+    @item = Item.new
+    @store_item = @item.deep_clone(include: [:item_details,{item_details: :size_stocks}] )
+    #@store_item = @item.deep_clone(include: [:item_details])
+    #@store_item.attributes = item_params #strong parameter
+    #@item = Item.find(params[:id])
+    #@store_item = @item.deep_clone(include: [:item_details,{item_details: :size_stocks}] ,except: [{ item_details: [:id] }])
+    #@stores = Store.all
+    @store_item = StoreItem.new
+    @store_item.item_id = @item.id
+    @store_item.name = @item.name
+    @store_item.genre_id = @item.genre_id
+    @store_item.price = @item.price
+    @store_item.is_active = @item.is_active
+    @store_item.store_id = @item.store_id
+    @item_details = @item.item_details
+    @item_details.each do |item_detail|
+      @store_item_detail.color = item_detail.color
+      @store_item_detail.store_item_id = @store_item.id
+      @size_stocks = item_detail.size_stocks
+      @size_stocks.each do |size_stock|
+        @store_stock.store_item_detail_id = size_stock.id
+        @store_stock.size = size_stock.size
+        @store_stock.stock = size_stock.stock
+      end
+    end
+    
+    @store_item.save!
+    redirect_to admin_stock_path(@store_item)
   end
   
   private
