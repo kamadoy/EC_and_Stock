@@ -1,7 +1,51 @@
 <div class="container">
-<%= form_with model: @item ,url: admin_items_path do |f| %>
-<h4>商品新規登録</h4>
-<%= f.hidden_field :store_id, :value => 1 %>
+<%= form_with model: @stock ,url: admin_delivery_path do |f| %>
+<h4>店舗在庫配送</h4>
+
+
+  <div class="row">
+    <div class="col-md-3">
+<label for="name">商品名</label></div>
+ <div class="col-md-6">
+<h4><%= @stock.name %></h4></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="introduction">商品説明</label></div>
+ <div class="col-md-6">
+<p><%= @stock.introduction %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">ジャンル</label></div>
+ <div class="col-md-6">
+<p><%= @stock.genre.name %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">税抜き価格<br>(税込み価格)</label></div>
+ <div class="col-md-6">
+<h4><%= @stock.price %>円</h4>
+<p><%= (@stock.price*1.08).floor %>円</p>
+</div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">販売ステータス</label></div>
+ <div class="col-md-6">
+<p><%= @stock.is_active ? '販売中':'販売停止中' %></p></div>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="form-group col-md-2">
+<label for="store">配送先店舗</label></div>
+ <div class="form-group col-md-2">
+<%= f.select :store_id, @stores.map{|store| [store.name,store.id]} %></div>
+</div>
 <div class="row">
     <div class="form-group col-md-2">
 <label for="img">商品画像</label></div>
@@ -49,13 +93,12 @@
         <% end %>
         </div>
         <div class="links">
-          <%= link_to_add_association "色追加", f, :item_details,
+          <%#= link_to_add_association "色追加", f, :item_details,
            class: 'btn btn-success' %>
         </div>
     </div>
 
 
-<%= f.submit '新規登録', class: "btn btn-success btn-sm" %>
+<%= f.submit '更新', class: "btn btn-success btn-sm" %>
 <% end %>
-
 </div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # 顧客用
 # URL /customers/sign_in ...
@@ -41,16 +42,23 @@ devise_for :store, controllers: {
   end
 
   namespace :admin do
+      get 'stocks/:id/new_store_stock' => 'stocks#new_store_stock', as: 'new_store_stock'
+     post 'stocks/delivery' => 'stocks#delivery', as: 'delivery'
    resources :items,only: [:new,:create,:index,:show,:edit,:update]
    resources :genres,only: [:create,:index,:edit,:update]
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
    resources :stores,only: [:new,:create,:index,:show,:edit,:update,:destroy]
+   resources :stocks,only: [:create,:show,:edit,:update]
+   
    get '/'=> 'homes#top', as: 'top'
-   post 'items/choice' => 'items#choice', as: 'choice'
-    #get 'homes/top'
 
+  
 
-   # get 'homes/about' => 'homes#about', as: 'about'
   end
+   namespace :store do
+   resources :items,only: [:index,:show]
+   resources :stores,only: [:index,:show,:edit,:update]
+   resources :stocks,only: [:index,:show,:edit,:update]
+   end
 end

@@ -1,0 +1,16 @@
+<div class="nested-fields">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="size_select">サイズ選択</label>
+        </div>
+        <div class="field">
+            <div class="form-group col-md-2">
+                <%#= f.select :size, @item_detail.size_stocks.map{|size_stock| [size_stock.sizes_i18n,size_stock.id]} %>
+                <%= f.select :size, SizeStock.sizes_i18n.invert,{},placeholder: 0 %>
+            </div>
+        </div>
+        <label for="size_select">在庫数</label>
+        <%= f.number_field :stock %>
+        <%= link_to_remove_association "サイズと在庫を削除", f %>
+    </div>
+</div>

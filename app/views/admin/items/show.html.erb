@@ -57,3 +57,5 @@
    </table>
    <% end %>
      <%= link_to "編集",edit_admin_item_path, class: "btn btn-success btn-sm text-center" %>
+     <%#= link_to "店舗へ在庫を新規配送する" ,admin_delivery_path(item: {id: @item.id}),method: :post %>
+     <%= link_to "店舗へ在庫を新規配送する" ,edit_admin_stock_path(@item) %>

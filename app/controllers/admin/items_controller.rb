@@ -40,6 +40,17 @@ end
      render :edit
      end
   end
+     
+  def delivery
+    @item = Item.find_by(id: params[:item_id])
+    #@stock = @item.deep_dup
+    @stock = @item.deep_clone(include: [:item_details])
+    @stock.attributes = item_params #strong parameter
+    @stock.save
+    redirect_to edit_admin_stock_path(@stock)
+  end
+  
+
   
   private
 
