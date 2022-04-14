@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+  before_action :search
  def new
     @item = Item.new
     @item_detail = @item.item_details.build 
@@ -29,7 +30,7 @@ end
   end
 
   def index
-    @items = Item.all
+   @items = @q.result(distinct: true)
   end
   
   def update
@@ -39,6 +40,10 @@ end
      else
      render :edit
      end
+  end
+  
+  def search
+    @q = Item.ransack(params[:q])
   end
   
   private

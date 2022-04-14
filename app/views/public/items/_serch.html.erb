@@ -1,0 +1,28 @@
+
+<%= search_form_for q do |f| %>
+<h4>商品名検索</h4>
+<%= f.label :name_cont, '商品名' %>
+  <%= f.search_field :name_cont %>
+  <h4>ジャンル検索</h4>
+ <%= f.collection_select :genre_id_eq, Genre.all, :id, :name, options = { include_blank: true} %>
+ <h4>色検索</h4>
+ <%= f.radio_button :item_details_color_eq, '',{:checked => true} %>
+ <%= f.label :color, '指定しない' %>
+ <%= f.radio_button :item_details_color_eq, 0 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:ivory] %>
+ <%= f.radio_button :item_details_color_eq, 1 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:black] %>
+ <%= f.radio_button :item_details_color_eq, 2 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:brown] %>
+ <%= f.radio_button :item_details_color_eq, 3 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:navy] %>
+ <%= f.radio_button :item_details_color_eq, 4 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:gray] %>
+ <%= f.radio_button :item_details_color_eq, 5 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:red] %>
+ <%= f.radio_button :item_details_color_eq, 6 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:green] %>
+ <%= f.radio_button :item_details_color_eq, 7 %>
+ <%= f.label :color, ItemDetail.colors_i18n[:yellow] %>
+  <%= f.submit "検索" %>
+<% end %>

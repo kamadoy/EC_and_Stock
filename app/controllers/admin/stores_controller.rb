@@ -35,6 +35,8 @@ class Admin::StoresController < ApplicationController
 
   end
 
+private
+
   def store_params
     params.require(:store).permit(:name,:email,:address,:encrypted_password,:created_at,:updated_at)
   end

@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   has_one_attached :image_id
   belongs_to :genre
-  belongs_to :store
+  has_many :inventorys, dependent: :destroy
   has_many :item_details, dependent: :destroy
   accepts_nested_attributes_for :item_details, allow_destroy: true
   validates_associated :item_details

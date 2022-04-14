@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_090805) do
+ActiveRecord::Schema.define(version: 2022_04_11_132610) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +95,16 @@ ActiveRecord::Schema.define(version: 2022_04_03_090805) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.integer "store_id"
+    t.integer "item_id"
+    t.integer "color"
+    t.integer "size"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
+  end
+
   create_table "item_details", force: :cascade do |t|
     t.integer "color", default: 0
     t.datetime "created_at", precision: 6, null: false
@@ -110,7 +120,6 @@ ActiveRecord::Schema.define(version: 2022_04_03_090805) do
     t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "store_id"
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -138,6 +147,32 @@ ActiveRecord::Schema.define(version: 2022_04_03_090805) do
 
   create_table "size_stocks", force: :cascade do |t|
     t.integer "item_detail_id"
+    t.integer "size"
+    t.integer "stock"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "store_item_details", force: :cascade do |t|
+    t.integer "color", default: 0
+    t.integer "store_item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "store_items", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.integer "price"
+    t.boolean "is_active", default: true
+    t.integer "store_id"
+    t.integer "item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "store_stocks", force: :cascade do |t|
+    t.integer "store_item_detail_id"
     t.integer "size"
     t.integer "stock"
     t.datetime "created_at", precision: 6, null: false

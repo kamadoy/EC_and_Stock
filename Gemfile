@@ -62,3 +62,5 @@ gem 'rolify'
 
 gem 'cocoon'
 gem "jquery-rails"
+
+gem 'ransack'
