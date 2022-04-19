@@ -22,7 +22,7 @@
                         <th><%= image_tag item_detail.get_image_detail_id(50,50) %></th>
                     </thead>
                     <today>
-                        <% item_detail.size_stocks.each do |size_stock| %>
+                        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
                         <tr>
                             <% if size_stock.stock >= 1 %>
                                 <td><%= size_stock.size %></td>
@@ -43,7 +43,7 @@
                 </table>
 
             <% end %>
-
+<%= link_to "店舗在庫を見る", stock_path(@item), target: :_blank %>
         <%# else %>
             <h4>購入にはログインが必要です</h4>
             <%= link_to "新規登録", new_customer_registration_path %><br>

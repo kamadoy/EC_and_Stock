@@ -28,7 +28,7 @@
 <label for="genre">税抜き価格<br>(税込み価格)</label></div>
  <div class="col-md-6">
 <h4><%= @item.price %>円</h4>
-<p><%= (@item.price*1.08).floor %>円</p>
+<p><%= (@item.taxin_price).floor %>円</p>
 </div>
 </div>
   <div class="row">
@@ -42,7 +42,7 @@
 <table class ="table table-bordered">
   <thead class="table-secondary">
 <th><%= item_detail.color %></th>
-<% item_detail.size_stocks.each do |size_stock| %>
+<% item_detail.size_stocks.order(:size).each do |size_stock| %>
 <th><%= size_stock.size %></th>
 <% end %>
 </thead>
@@ -57,3 +57,35 @@
    </table>
    <% end %>
      <%= link_to "編集",edit_admin_item_path, class: "btn btn-success btn-sm text-center" %>
+     
+     
+ <h1>店舗へ配送する</h1>
+  <%#= form_with model: @stock, url: {controller: 'stocks',action: 'create'} do |f| %>
+
+             <% @item_details.each do |item_detail| %>
+                <table class ="table table-bordered">
+                    <thead class="table-secondary">
+                        <th><%= item_detail.color %></th>
+                        <th><%= image_tag item_detail.get_image_detail_id(50,50) %></th>
+                        <th></th>
+                    </thead>
+                    <today>
+                        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
+                        <tr>
+                         
+                                <td><%= size_stock.size %></td>
+                                <%= form_with model: @inventory, url: {controller: 'stocks',action: 'create'} do |f| %>
+                                <td><%= f.collection_select :store_id,Store.all, :id, :name, options = { include_blank: true} %></td>
+                                    <td><%= f.hidden_field :size_stock_id, :value => size_stock.id %>
+                                    <%#= f.hidden_field :store_id, :value => @store.id %>
+                                    <%= f.select :quantity,*[1..size_stock.stock]  %></td>
+                                    <td><%= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %></td>
+                                <% end %>
+                          
+                        </tr>
+                        <% end %>
+                    </today>
+                </table>
+                <%#= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %>
+<%# end %>
+            <% end %>

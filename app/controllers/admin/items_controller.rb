@@ -20,6 +20,8 @@ def show
   @item = Item.find(params[:id])
   @item_details = @item.item_details
   #@size_stocks = @item.item_details.size_stocks
+  @inventory = Inventory.new
+  
 
 end
 

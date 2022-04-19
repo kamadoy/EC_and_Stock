@@ -3,4 +3,5 @@ class SizeStock < ApplicationRecord
      belongs_to :item_detail
      has_many :order_details, dependent: :destroy
      has_many :cart_items, dependent: :destroy
+     has_many :inventories, dependent: :destroy
 end

@@ -1,0 +1,31 @@
+<div class ="container"> 
+<% @item_details.each do |item_detail| %>
+<h4><%= item_detail.color %></h4>
+    <table>
+        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
+        <thead>
+            <th><%= size_stock.size %></th>
+            <th>店舗名</th>
+            <th>在庫</th>
+        </thead>
+        <today>
+            <% size_stock.inventories.order(:store_id).each do |inventory| %>
+            <tr>
+                <td></td>
+                <td><%#=link_to store_path(inventory.store) do %>
+                <%= inventory.store.name %>
+                <%# end %></td>
+                <% if inventory.quantity >=1 %>
+                <td>〇</td>
+                <% else %>
+                <td>×</td>
+                <% end %>
+            </tr>
+            <% end %>
+        </today>
+        <% end %>
+    </table>
+    <% end %>
+
+
+</div>

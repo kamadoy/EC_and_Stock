@@ -1,4 +1,5 @@
 class Inventory < ApplicationRecord
-     belongs_to :items
-     belongs_to :stores
+     belongs_to :size_stock
+     belongs_to :store
+  
 end

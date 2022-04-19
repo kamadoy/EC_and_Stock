@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  namespace :public do
+    get 'stocks/index'
+  end
   namespace :store do
     get 'items/index'
     get 'items/show'
@@ -44,6 +47,7 @@ devise_for :store, controllers: {
     resources :addresses,only: [:index,:edit,:create,:destroy,:update]
     resources :customers,only: [:show,:edit,:update]
     resources :items,only: [:index,:show]
+    resources :stocks,only: [:show]
  
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/thanks' => 'orders#thanks', as: 'thanks'
@@ -57,7 +61,7 @@ devise_for :store, controllers: {
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
    resources :stores,only: [:new,:create,:index,:show,:edit,:update,:destroy]
-   resources :stocks,only: [:new,:create,:index,:show,:edit,:update,:destroy]
+   resources :stocks,only: [:create,:index,:show,:edit,:update,:destroy]
    get '/'=> 'homes#top', as: 'top'
   
     #get 'homes/top'

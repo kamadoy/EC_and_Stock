@@ -8,7 +8,7 @@ class Public::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @item_details = @item.item_details
+    @item_details = @item.item_details.order(:color)
     @cart_item = CartItem.new
   end
   
