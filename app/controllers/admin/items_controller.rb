@@ -33,7 +33,8 @@ end
   end
 
   def index
-   @items = @q.result(distinct: true)
+   @items = Item.where(is_active: true)
+   @stop_items = Item.where(is_active: false)
   end
   
   def update

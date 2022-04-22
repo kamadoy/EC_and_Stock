@@ -35,16 +35,12 @@ class Admin::StocksController < ApplicationController
     end
 
   end
-  
-  def show
-    @item = Item.find(params[:id])
-    @item_details = @item.item_details
-    #@inventory
-    #@inventorys = Inventories.where(size_stock_id: @size_stock.id).order(store_id: "DESC")
-  end
+
 
   def index
-    @inventorys = Inventory.all.order(size_stock_id: "DESC").order(store_id: "DESC")
+      @item = Item.find(params[:item_id])
+      @item_details = @item.item_details
+    #@inventorys = Inventory.includes(:size_stock).order("size_stocks.size DESC")
   end
   
   private

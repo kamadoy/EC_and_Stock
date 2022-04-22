@@ -39,8 +39,9 @@ devise_for :store, controllers: {
     resources :cart_items,only: [:index,:create,:update,:destroy]
     resources :addresses,only: [:index,:edit,:create,:destroy,:update]
     resources :customers,only: [:show,:edit,:update]
-    resources :items,only: [:index,:show]
-    resources :stocks,only: [:show]
+    resources :items,only: [:index,:show]do
+        resources :stocks,only: [:index]
+    end
     resources :stores,only: [:show,:index]
  
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
@@ -50,24 +51,21 @@ devise_for :store, controllers: {
   end
 
   namespace :admin do
+
    resources :items,only: [:new,:create,:index,:show,:edit,:update] do
-        resources :stocks, only: [:new,:create,:index,:show,:edit,:update,:destroy]
+        resources :stocks, only: [:new,:create,:index,:edit,:update]
     end
    resources :genres,only: [:create,:index,:edit,:update]
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
    resources :stores, only: [:new,:create,:index,:show,:edit,:update,:destroy]
    get '/'=> 'homes#top', as: 'top'
-  
-    #get 'homes/top'
-
-
-   # get 'homes/about' => 'homes#about', as: 'about'
   end
   
   namespace :store do
        resources :stores,only: [:index,:show,:edit,:update,:destroy]
-       resources :items,only: [:index,:show]
-       resources :stocks,only: [:index,:show]
+       resources :items,only: [:index,:show]do
+        resources :stocks,only: [:index]
+    end
   end
 end

@@ -56,40 +56,11 @@
   </today>
    </table>
    <% end %>
-     <%= link_to "編集",edit_admin_item_path, class: "btn btn-success btn-sm text-center" %>
-     <%= link_to "在庫を見る",admin_item_stocks_path(@item), class: "btn btn-success btn-sm text-center" %>
+     <%= link_to "編集",edit_admin_item_path, class: "btn btn-success" %>
+     <%= link_to "在庫を見る",admin_item_stocks_path(@item), class: "btn btn-primary" %>
      
      
- <h1>店舗へ配送する</h1>
-  <%#= form_with model: @stock, url: {controller: 'stocks',action: 'create'} do |f| %>
-
-             <% @item_details.each do |item_detail| %>
-                <table class ="table table-bordered">
-                    <thead class="table-secondary">
-                        <th><%= item_detail.color %></th>
-                        <th><%= image_tag item_detail.get_image_detail_id(50,50) %></th>
-                        <th></th>
-                    </thead>
-                    <today>
-                        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
-                        <tr>
-                         
-                                <td><%= size_stock.size %></td>
-                                <%#= form_with model: @inventory, url: {controller: 'stocks',action: 'create'} do |f| %>
-                                <td><%#= f.collection_select :store_id,Store.all, :id, :name, options = { include_blank: true} %></td>
-                                    <td><%#= f.hidden_field :size_stock_id, :value => size_stock.id %>
-                                    <%#= f.hidden_field :store_id, :value => @store.id %>
-                                    <%#= f.select :quantity,*[1..size_stock.stock]  %></td>
-                                    <td><%#= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %></td>
-                                <%# end %>
-                          
-                        </tr>
-                        <% end %>
-                    </today>
-                </table>
-                <%#= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %>
-<%# end %>
-            <% end %>
+</div>
             
            
  
