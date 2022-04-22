@@ -5,7 +5,8 @@
         </div>
         <div class="field">
             <div class="form-group col-md-2">
-                <%= f.select :size, SizeStock.sizes_i18n.invert,{},placeholder: 0 %>
+                <%#= f.collection_select :size_stock_id, @size_stocks, :id, :size, {prompt: '選択してください' }, {class: 'form-control js-select-form'}%>
+                <%= f.select :size, SizeStock.sizes_i18n.invert,{},placeholder: 0  %>
             </div>
         </div>
         <label for="size_select">在庫数</label>

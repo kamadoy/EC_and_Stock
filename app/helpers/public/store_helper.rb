@@ -1,0 +1,2 @@
+module Public::StoreHelper
+end

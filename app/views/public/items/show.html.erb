@@ -13,18 +13,19 @@
         <% if @item.is_active == false %>
             <h4>販売終了</h4>
             <% else %>
-        <% end %>
+        
         <%# if customer_signed_in? %>
             <% @item_details.each do |item_detail| %>
                 <table class ="table table-bordered">
                     <thead class="table-secondary">
                         <th><%= item_detail.color %></th>
                         <th><%= image_tag item_detail.get_image_detail_id(50,50) %></th>
+                        <th></th>
                     </thead>
                     <today>
                         <% item_detail.size_stocks.order(:size).each do |size_stock| %>
                         <tr>
-                            <% if size_stock.stock >= 1 %>
+                            <% if customer_signed_in?&&size_stock.stock >= 1 %>
                                 <td><%= size_stock.size %></td>
                                 <td>〇</td>
                                 <%= form_with model: @cart_item, url: {controller: 'cart_items',action: 'create'} do |f| %>
@@ -32,7 +33,11 @@
                                     <%= f.hidden_field :amount, :value => 1 %>
                                     <td><%= f.submit 'カートに入れる', class: " btn btn-sm btn-success" %></td>
                                 <% end %>
-                            <% else %>
+                            <% elsif %>
+                             <td><%= size_stock.size %></td>
+                                <td>〇</td>
+                                <td></td>
+                                <% else %>
                                 <td><%= item_detail.size_stock.size %></td>
                                 <td>×</td>
                                 <td></td>
@@ -43,11 +48,12 @@
                 </table>
 
             <% end %>
-<%= link_to "店舗在庫を見る", stock_path(@item), target: :_blank %>
-        <%# else %>
+            <% end %>
+<%= link_to "店舗在庫を見る", stock_path(@item), target: :_blank, class: " btn btn-sm btn-primary" %>
+        <% unless customer_signed_in? %>
             <h4>購入にはログインが必要です</h4>
             <%= link_to "新規登録", new_customer_registration_path %><br>
             <%= link_to "ログイン", new_customer_session_path %>
-        <%# end %>
+        <% end %>
     </div>
 </div>

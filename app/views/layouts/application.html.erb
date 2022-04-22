@@ -44,6 +44,9 @@ yarn add github:nathanvda/cocoon#c24ba53<!DOCTYPE html>
       <li class="nav-list">
       <%= link_to "注文履歴", orders_path, class: 'nav-link text-dark' %>
       </li>
+      <li class="nav-list">
+        <%= link_to "店舗一覧", stores_path, class: 'nav-link text-dark' %>
+      </li>
 
     <% else %>
     <% if admin_signed_in? %>
@@ -54,22 +57,33 @@ yarn add github:nathanvda/cocoon#c24ba53<!DOCTYPE html>
         <%= link_to "ジャンル追加", admin_genres_path, class: 'nav-link text-dark' %>
       </li>
       <li class="nav-list">
-        <%#= link_to "商品一覧", admin_items_path , class: 'nav-link text-dark'%>
+        <%= link_to "商品一覧", admin_items_path , class: 'nav-link text-dark'%>
       </li>
       <li class="nav-list">
-        <%#= link_to "顧客一覧", admin_customers_path, class: 'nav-link text-dark' %>
+        <%= link_to "顧客一覧", admin_customers_path, class: 'nav-link text-dark' %>
       </li>
       <li class="nav-list">
-        <%#= link_to "注文一覧", admin_top_path, class: 'nav-link text-dark' %>
+        <%= link_to "注文一覧", admin_top_path, class: 'nav-link text-dark' %>
       </li>
            <li class="nav-list">
         <%= link_to "店舗一覧", admin_stores_path, class: 'nav-link text-dark' %>
       </li>
+    
 
     <% else %>
     <% if store_signed_in? %>
+    <%= current_store.name %>
         <li class="nav-list">
       <%= link_to "店舗ログアウト", destroy_store_session_path, method: :delete, class: 'nav-link text-dark' %>
+      </li>
+       <li class="nav-list">
+        <%= link_to "商品一覧", store_items_path , class: 'nav-link text-dark'%>
+      </li>
+           <li class="nav-list">
+        <%= link_to "店舗一覧", store_stores_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-list">
+        <%= link_to "在庫一覧", store_stocks_path, class: 'nav-link text-dark' %>
       </li>
 
     <% else %>

@@ -1,2 +1,29 @@
-<h1>Admin::Stocks#show</h1>
-<p>Find me in app/views/admin/stocks/show.html.erb</p>
+<div class ="container"> 
+
+<h4>店舗在庫</h4>
+<% @item_details.each do |item_detail| %>
+<h4><%= item_detail.color %></h4>
+    <table>
+        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
+        <thead>
+            <th><%= size_stock.size %></th>
+            <th>店舗名</th>
+            <th>在庫</th>
+        </thead>
+        <today>
+            <% size_stock.inventories.order(:store_id).each do |inventory| %>
+            <tr>
+                <td></td>
+                <td><%=link_to admin_store_path(inventory.store) do %>
+                <%= inventory.store.name %>
+                <% end %></td>
+                <td><%= inventory.quantity %></td>
+            </tr>
+            <% end %>
+        </today>
+        <% end %>
+    </table>
+    <% end %>
+
+
+</div>

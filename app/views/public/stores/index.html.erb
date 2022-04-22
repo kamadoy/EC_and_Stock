@@ -1,0 +1,18 @@
+<div class = "col-md-5">
+
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+      <th>店舗一覧</th>
+      <th></th>
+    </thead>
+  <today>
+ <tr>
+ <% @stores.each do |store| %>
+<td> <%= store.name %></td>
+<td><%= link_to "詳細ページ", store_path(store.id), class: "btn btn-success btn-sm" %></td>
+
+ </tr>
+<% end %>
+  </today>
+   </table>
+</div>

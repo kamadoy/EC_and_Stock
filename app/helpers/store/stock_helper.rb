@@ -1,0 +1,2 @@
+module Store::StockHelper
+end

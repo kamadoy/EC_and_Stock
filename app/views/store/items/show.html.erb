@@ -1,52 +1,60 @@
-<div class ="container">
-    <div class ="row">
-        <div class ="col-lg-6">
-            <%= image_tag @item.get_image_id(500,500) %>
-        </div>
-    <div class ="col-lg-6"><br>
-        <h4><%= @item.name %></h4>
-        <%= @item.introduction %>
-        <div class ="row text-right">
-            <h4><%= (@item.taxin_price).floor %>円</h4>
-            <P>(税込)</P>
-        </div>
-        <% if @item.is_active == false %>
-            <h4>販売終了</h4>
-            <% else %>
-        <% end %>
-        <%# if customer_signed_in? %>
-            <% @item_details.each do |item_detail| %>
-                <table class ="table table-bordered">
-                    <thead class="table-secondary">
-                        <th><%= item_detail.color %></th>
-                        <th><%= image_tag item_detail.get_image_detail_id(50,50) %></th>
-                    </thead>
-                    <today>
-                        <% item_detail.size_stocks.each do |size_stock| %>
-                        <tr>
-                            <% if size_stock.stock >= 1 %>
-                                <td><%= size_stock.size %></td>
-                                <td>〇</td>
-                                <%= form_with model: @cart_item, url: {controller: 'cart_items',action: 'create'} do |f| %>
-                                    <%= f.hidden_field :size_stock_id, :value => size_stock.id %>
-                                    <%= f.hidden_field :amount, :value => 1 %>
-                                    <td><%= f.submit 'カートに入れる', class: " btn btn-sm btn-success" %></td>
-                                <% end %>
-                            <% else %>
-                                <td><%= item_detail.size_stock.size %></td>
-                                <td>×</td>
-                                <td></td>
-                            <% end %>
-                        </tr>
-                        <% end %>
-                    </today>
-                </table>
+<div class="container">
 
-            <% end %>
-        <%# else %>
-            <h4>購入にはログインが必要です</h4>
-            <%= link_to "新規登録", new_customer_registration_path %><br>
-            <%= link_to "ログイン", new_customer_session_path %>
-        <%# end %>
-    </div>
+  <div class ="row">
+    <div class ="col-lg-6">
+  <%= image_tag @item.get_image_id(500,500) %>
+  </div>
+  <div class ="col-lg-6"><br>
+  <div class="row">
+    <div class="col-md-3">
+<label for="name">商品名</label></div>
+ <div class="col-md-6">
+<h4><%= @item.name %></h4></div>
 </div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="introduction">商品説明</label></div>
+ <div class="col-md-6">
+<p><%= @item.introduction %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">ジャンル</label></div>
+ <div class="col-md-6">
+<p><%= @item.genre.name %></p></div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">税抜き価格<br>(税込み価格)</label></div>
+ <div class="col-md-6">
+<h4><%= @item.price %>円</h4>
+<p><%= (@item.taxin_price).floor %>円</p>
+</div>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+<label for="genre">販売ステータス</label></div>
+ <div class="col-md-6">
+<p><%= @item.is_active ? '販売中':'販売停止中' %></p></div>
+</div>
+
+<% @item_details.each do |item_detail| %>
+<table class ="table table-bordered">
+  <thead class="table-secondary">
+<th><%= item_detail.color %></th>
+<% item_detail.size_stocks.order(:size).each do |size_stock| %>
+<th><%= size_stock.size %></th>
+<% end %>
+</thead>
+  <today>
+ <tr>
+     <td><%= image_tag item_detail.get_image_detail_id(50,50) %></td>
+<% item_detail.size_stocks.each do |size_stock| %>
+<td><%= size_stock.stock %></td>
+<% end %>
+ </tr>
+  </today>
+   </table>
+   <% end %>
+
+     <%= link_to "在庫を見る",store_stock_path(@item), target: :_blank, class: "btn btn-success btn-sm text-center" %>

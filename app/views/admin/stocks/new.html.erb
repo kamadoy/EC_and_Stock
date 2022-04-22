@@ -1,86 +1,64 @@
-<div class="container">
+<div class ="container"> 
+<h4>在庫を店舗に配送する</h4>
 
-    <div class ="row">
-        <div class ="col-lg-6">
-            <%= image_tag @item.get_image_id(500,500) %>
-        </div>
-    <div class ="col-lg-6"><br>
-        <div class="row">
-            <div class="col-md-3">
-                <label for="name">商品名</label>
-            </div>
- <div class="col-md-6">
-<h4><%= @item.name %></h4></div>
-</div>
-  <div class="row">
-    <div class="col-md-3">
-<label for="introduction">商品説明</label></div>
- <div class="col-md-6">
-<p><%= @item.introduction %></p></div>
-</div>
-  <div class="row">
-    <div class="col-md-3">
-<label for="genre">ジャンル</label></div>
- <div class="col-md-6">
-<p><%= @item.genre.name %></p></div>
-</div>
-  <div class="row">
-    <div class="col-md-3">
-<label for="genre">税抜き価格<br>(税込み価格)</label></div>
- <div class="col-md-6">
-<h4><%= @item.price %>円</h4>
-<p><%= (@item.taxin_price).floor %>円</p>
-</div>
-</div>
-  <div class="row">
-    <div class="col-md-3">
-<label for="genre">販売ステータス</label></div>
- <div class="col-md-6">
-<p><%= @item.is_active ? '販売中':'販売停止中' %></p></div>
-</div>
-<%= form_with model: @form, url: inventories_path, method: :post, local: true do |form| %>
+            
+             
+            <%= form_with model: @form,url: admin_item_stocks_path(@item), method: :post, local: true do |form| %>
+            <%# binding.irb %>
+          <% @item_details.each do |item_detail| %>
+          <%# binding.irb %>
+            
+             <table>
+                 <thread>
+                     <tr>
+                         <th><%= item_detail.color %></th>
+                         <th>サイズ</th>
+                         <th>配送先店舗</th>
+                         <th>配送数量</th>
+                     </tr>
+                 </thread>
+                 <today>
+                   <%# binding.irb %>
+                     <%= form.fields_for :inventories do |f| %>
+                     <tr>
+                         <td><%= f.check_box :availability %></td>
+                         <td><%= f.collection_select :size_stock_id,item_detail.size_stocks.order(:size),:id, :size,options = { include_blank: true} %></td>
+                         <td><%= f.collection_select :store_id,Store.all, :id, :name, options = { include_blank: true} %></td>
+                         <td><%= f.select :quantity,*[1..10]  %></td>
+                     </tr>
+                      <%end%>
+                 </today>
+             </table>
+             
+             
+             
+             <%end%>
+             <%= form.submit "一括登録" %>
+             <%end%>
+<h4>店舗在庫</h4>
 <% @item_details.each do |item_detail| %>
-<table class ="table table-bordered">
-  <thead class="table-secondary">
-<th><%= item_detail.color %></th>
-<% item_detail.size_stocks.each do |size_stock| %>
-<th><%= size_stock.size %></th>
-<% end %>
-</thead>
-  <today>
- <tr>
-     <td><%= image_tag item_detail.get_image_detail_id(50,50) %></td>
-<% item_detail.size_stocks.each do |size_stock| %>
-<td><%= f.hidden_field :size_stock_id, :value => size_stock.id %>
-<%= f.hidden_field :store_id, :value => @store.id %>
-<%= f.select :quantity, @current_inventory_array %></td>
+<h4><%= item_detail.color %></h4>
+    <table>
+        <% item_detail.size_stocks.order(:size).each do |size_stock| %>
+        <thead>
+            <th><%= size_stock.size %></th>
+            <th>店舗名</th>
+            <th>在庫</th>
+        </thead>
+        <today>
+            <% size_stock.inventories.order(:store_id).each do |inventory| %>
+            <tr>
+                <td></td>
+                <td><%=link_to admin_store_path(inventory.store) do %>
+                <%= inventory.store.name %>
+                <% end %></td>
+                <td><%= inventory.quantity %></td>
+            </tr>
+            <% end %>
+        </today>
+        <% end %>
+    </table>
+    <% end %>
 
-<% end %>
- </tr>
-  </today>
-   </table>
-   <% end %>
-   <% end %>
 
-
-<%= form_with model: @form, url: inventories_path, method: :post, local: true do |form| %>
-  <table>
-    %thread
-      %tr
-        %th 登録
-        %th 商品名
-        %th 販売価格（円）
-        %th 発注単位
-  %tbody
-    = form.fields_for :products do |f|
-      %tr
-        %td.text-center
-          = f.check_box :availability
-        %td
-          = f.text_field :name
-        %td
-          = f.text_field :price
-        %td
-          = f.text_field :unit
-  = form.submit "一括登録"
-  = link_to "戻る", :back
+</div>

@@ -12,14 +12,10 @@
             <% size_stock.inventories.order(:store_id).each do |inventory| %>
             <tr>
                 <td></td>
-                <td><%=link_to store_path(inventory.store) do %>
+                <td><%=link_to store_store_path(inventory.store) do %>
                 <%= inventory.store.name %>
                 <% end %></td>
-                <% if inventory.quantity >=1 %>
-                <td>〇</td>
-                <% else %>
-                <td>×</td>
-                <% end %>
+                <td><%= inventory.quantity %></td>
             </tr>
             <% end %>
         </today>

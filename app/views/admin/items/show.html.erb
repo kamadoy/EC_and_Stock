@@ -57,6 +57,7 @@
    </table>
    <% end %>
      <%= link_to "編集",edit_admin_item_path, class: "btn btn-success btn-sm text-center" %>
+     <%= link_to "在庫を見る",admin_item_stocks_path(@item), class: "btn btn-success btn-sm text-center" %>
      
      
  <h1>店舗へ配送する</h1>
@@ -74,13 +75,13 @@
                         <tr>
                          
                                 <td><%= size_stock.size %></td>
-                                <%= form_with model: @inventory, url: {controller: 'stocks',action: 'create'} do |f| %>
-                                <td><%= f.collection_select :store_id,Store.all, :id, :name, options = { include_blank: true} %></td>
-                                    <td><%= f.hidden_field :size_stock_id, :value => size_stock.id %>
+                                <%#= form_with model: @inventory, url: {controller: 'stocks',action: 'create'} do |f| %>
+                                <td><%#= f.collection_select :store_id,Store.all, :id, :name, options = { include_blank: true} %></td>
+                                    <td><%#= f.hidden_field :size_stock_id, :value => size_stock.id %>
                                     <%#= f.hidden_field :store_id, :value => @store.id %>
-                                    <%= f.select :quantity,*[1..size_stock.stock]  %></td>
-                                    <td><%= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %></td>
-                                <% end %>
+                                    <%#= f.select :quantity,*[1..size_stock.stock]  %></td>
+                                    <td><%#= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %></td>
+                                <%# end %>
                           
                         </tr>
                         <% end %>
@@ -89,3 +90,6 @@
                 <%#= f.submit '在庫に追加する', class: " btn btn-sm btn-success" %>
 <%# end %>
             <% end %>
+            
+           
+ 

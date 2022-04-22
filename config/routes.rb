@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
 
 
-  namespace :public do
-    get 'stocks/index'
-  end
-  namespace :store do
-    get 'items/index'
-    get 'items/show'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # 顧客用
 # URL /customers/sign_in ...
@@ -48,6 +41,7 @@ devise_for :store, controllers: {
     resources :customers,only: [:show,:edit,:update]
     resources :items,only: [:index,:show]
     resources :stocks,only: [:show]
+    resources :stores,only: [:show,:index]
  
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
     get 'orders/thanks' => 'orders#thanks', as: 'thanks'
@@ -56,12 +50,13 @@ devise_for :store, controllers: {
   end
 
   namespace :admin do
-   resources :items,only: [:new,:create,:index,:show,:edit,:update]
+   resources :items,only: [:new,:create,:index,:show,:edit,:update] do
+        resources :stocks, only: [:new,:create,:index,:show,:edit,:update,:destroy]
+    end
    resources :genres,only: [:create,:index,:edit,:update]
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
-   resources :stores,only: [:new,:create,:index,:show,:edit,:update,:destroy]
-   resources :stocks,only: [:create,:index,:show,:edit,:update,:destroy]
+   resources :stores, only: [:new,:create,:index,:show,:edit,:update,:destroy]
    get '/'=> 'homes#top', as: 'top'
   
     #get 'homes/top'
@@ -73,5 +68,6 @@ devise_for :store, controllers: {
   namespace :store do
        resources :stores,only: [:index,:show,:edit,:update,:destroy]
        resources :items,only: [:index,:show]
+       resources :stocks,only: [:index,:show]
   end
 end
