@@ -49,7 +49,7 @@
 
             <% end %>
             <% end %>
-<%= link_to "店舗在庫を見る", stock_path(@item), target: :_blank, class: " btn btn-sm btn-primary" %>
+<%= link_to "店舗在庫を見る", item_stocks_path(@item), target: :_blank, class: " btn btn-sm btn-primary" %>
         <% unless customer_signed_in? %>
             <h4>購入にはログインが必要です</h4>
             <%= link_to "新規登録", new_customer_registration_path %><br>

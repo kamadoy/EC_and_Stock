@@ -1,11 +1,11 @@
-  enums:
-    order:
-      payment_method:
-        credit_card: "クレジットカード"
-        transfer: "銀行振込"
-      status:
-          weiting_deposit: "入金待ち"
-          payment_confimation: "入金確認"
-          production: "製作中"
-          ready_ship: "発送準備中"
-          sent: "発送済み"
+  ja:
+    enums:
+      order:
+        payment_method:
+          credit_card: "クレジットカード"
+          transfer: "銀行振込"
+        status:
+            weiting_deposit: "入金待ち"
+            payment_confimation: "入金確認"
+            ready_ship: "発送準備中"
+            sent: "発送済み"

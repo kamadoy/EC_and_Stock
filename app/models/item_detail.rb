@@ -13,4 +13,9 @@ class ItemDetail < ApplicationRecord
   def taxin_price
         price*1.1
   end
+  
+  with_options presence: true do
+        validates :color
+        validates :image_detail_id
+      end
 end

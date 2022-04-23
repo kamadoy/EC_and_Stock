@@ -27,7 +27,6 @@ devise_for :store, controllers: {
 
   scope module: :public do
 
-    get '/about' => 'homes#about', as: 'about'
     get 'customers/unsubsrib'=> 'customers#unsubsrib', as: 'unsubsrib'
     patch 'customers/withdraw'=> 'customers#withdraw', as: 'withdraw'
     delete '/cart_items/:id/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
@@ -58,12 +57,12 @@ devise_for :store, controllers: {
    resources :genres,only: [:create,:index,:edit,:update]
    resources :customers,only: [:show,:index,:edit,:update]
    resources :order_details,only: [:show,:update]
-   resources :stores, only: [:new,:create,:index,:show,:edit,:update,:destroy]
+   resources :stores, only: [:new,:create,:index,:show,:edit,:update]
    get '/'=> 'homes#top', as: 'top'
   end
   
   namespace :store do
-       resources :stores,only: [:index,:show,:edit,:update,:destroy]
+       resources :stores,only: [:index,:show,:edit,:update]
        resources :items,only: [:index,:show]do
         resources :stocks,only: [:index]
     end

@@ -45,10 +45,6 @@ class Admin::StocksController < ApplicationController
   
   private
 
-    def inventory_params
-      params.require(:inventory).permit(:store_id,:size_stock_id,:quantity,:created_at,:updated_at)
-    end
-    
     def inventory_collection_params
       params.require(:form_inventory_collection).permit(inventories_attributes: [:store_id,:size_stock_id,:quantity,:created_at,:updated_at,:availability])
     end

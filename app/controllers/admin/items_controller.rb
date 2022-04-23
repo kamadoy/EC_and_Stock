@@ -1,5 +1,5 @@
 class Admin::ItemsController < ApplicationController
-  before_action :search
+
  def new
     @item = Item.new
     @item_detail = @item.item_details.build 
@@ -20,7 +20,7 @@ def show
   @item = Item.find(params[:id])
   @item_details = @item.item_details
   #@size_stocks = @item.item_details.size_stocks
-  @form = Form::InventoryCollection.new
+ # @form = Form::InventoryCollection.new
  
   
 
@@ -46,9 +46,7 @@ end
      end
   end
   
-  def search
-    @q = Item.ransack(params[:q])
-  end
+
   
   private
 

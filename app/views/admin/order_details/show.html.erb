@@ -28,7 +28,7 @@
 <label for="day"><b>配送先</b></label></div>
  <div class="col-md-5">
  〒<%= @order.postal_code %>
-    <%= @order.adress %><%= @order.name %></div>
+    <%= @order.address %><%= @order.name %></div>
 </div>
 <div class="row">
     <div class="form-group col-md-2">
@@ -72,15 +72,15 @@
   <today>
  <tr>
 <% @order_details.each do |order_detail| %>
-<%= f.fields_for :order_details,order_detail do |i| %>
-<td><%= order_detail.item.name %></td>
-<td><%= order_detail.item.item_detail.color %><%= order_detail.item.item_detail.size_stock.size %></td>
-<td><%= (order_detail.item.price*1.08).floor %>円</td>
+
+<td><%= order_detail.size_stock.item_detail.item.name %></td>
+<td><%= order_detail.size_stock.item_detail.color %><%= order_detail.size_stock.size %></td>
+<td><%= (order_detail.size_stock.item_detail.item.taxin_price).floor %>円</td>
 <td><%= order_detail.amount %></td>
-<td><%= order_detail.amount*(order_detail.item.price*1.08).floor %>円</td>
-<%= i.submit "更新", class: "btn btn-success btn-sm" %></td>
+<td><%= order_detail.amount*(order_detail.size_stock.item_detail.item.taxin_price).floor %>円</td>
+
  </tr>
-<% end %>
+
 <% end %>
 <% end %>
   </today>

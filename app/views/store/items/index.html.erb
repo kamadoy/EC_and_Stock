@@ -1,11 +1,8 @@
 <div class="container">
 
 <div class="row mt-2">
-    <div class="col-lg-11"><h4>商品一覧</h4></div>
-     <%= link_to new_admin_item_path do %>
-  <i class="fa-solid fa-circle-plus fa-3x"></i>
-   <% end %>
-    </div>
+    <div class="col-lg-11"><h4>販売商品</h4></div>
+
 
   <table class ="table table-bordered mt-2">
   <thead class="table-secondary">
@@ -18,6 +15,33 @@
   <today>
  <tr>
  <% @items.each do |item| %>
+<td><%= item.id %></td>
+<td><%= link_to store_item_path(item) do %>
+　<%= item.name %>
+　<% end %></td>
+<td><%= item.genre.name %></td>
+<td><%= item.price %>円</td>
+<td><%= item.is_active ? '販売中':'販売停止中' %></td>
+ </tr>
+<% end %>
+  </today>
+   </table>
+   
+     <div class="col-lg-11"><h4>販売終了商品</h4></div>
+
+    
+
+  <table class ="table table-bordered mt-2">
+  <thead class="table-secondary">
+      <th>商品id</th>
+      <th>商品名</th>
+      <th>ジャンル</th>
+      <th>税抜き価格</th>
+      <th>販売ステータス</th>
+    </thead>
+  <today>
+ <tr>
+ <% @stop_items.each do |item| %>
 <td><%= item.id %></td>
 <td><%= link_to admin_item_path(item) do %>
 　<%= item.name %>

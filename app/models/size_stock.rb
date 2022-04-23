@@ -12,4 +12,9 @@ class SizeStock < ApplicationRecord
       errors.add(:size, "サイズの本社在庫数をオーバーしています") # エラーメッセージ
     end
   end
+  
+    with_options presence: true do
+        validates :size
+        validates :stock
+      end
 end

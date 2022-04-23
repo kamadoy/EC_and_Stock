@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(resource_or_scope)
       if resource.is_a?(Admin)
         admin_top_path
+      elsif resource.is_a?(Store)
+        store_items_path
       else
         root_path
       end
@@ -15,6 +17,8 @@ class ApplicationController < ActionController::Base
     def after_sign_out_path_for(resource_or_scope)
       if resource_or_scope == :admin
         new_admin_session_path
+      elsif resource_or_scope == :store
+        new_store_session_path
       else
         root_path
       end

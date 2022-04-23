@@ -3,6 +3,5 @@ class Public::HomesController < ApplicationController
     @items = Item.last(5)
   end
 
-  def about
-  end
+
 end
