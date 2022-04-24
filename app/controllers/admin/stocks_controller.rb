@@ -1,5 +1,5 @@
 class Admin::StocksController < ApplicationController
- 
+  before_action :authenticate_admin!
  def new
     @form = Form::InventoryCollection.new
     @item = Item.find(params[:item_id])

@@ -1,4 +1,5 @@
 class Public::ItemsController < ApplicationController
+
   before_action :search
   def index
    # @items = Item.all

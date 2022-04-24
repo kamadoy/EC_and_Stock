@@ -13,6 +13,13 @@
   <body>
       <header>
       <nav class="navar navar-expand-lg navbar-light bg-light">
+         <% if admin_signed_in? %>
+         <a class="navbar-brand p-3" href="/admin/"><%= image_tag('logo_shose.png') %></a>
+         <% elsif store_signed_in? %>
+         <a class="navbar-brand p-3" href="/store/items"><%= image_tag('logo_shose.png') %></a>
+         <% else %>
+         <a class="navbar-brand p-3" href="/"><%= image_tag('logo_shose.png') %></a>
+         <% end %>
 
 
 

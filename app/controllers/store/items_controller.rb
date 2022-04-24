@@ -1,4 +1,5 @@
 class Store::ItemsController < ApplicationController
+     before_action :authenticate_store!
   def index
    @items = Item.where(is_active: true)
    @stop_items = Item.where(is_active: false)
