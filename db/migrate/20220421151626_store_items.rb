@@ -1,5 +1,9 @@
 class StoreItems < ActiveRecord::Migration[6.1]
-  def change
+  def up
     drop_table :store_items
+  end
+  
+  def down
+    fail ActiveRecord::IrreversibleMigration
   end
 end
